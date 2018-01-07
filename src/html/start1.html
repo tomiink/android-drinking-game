@@ -1,0 +1,63 @@
+<!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
+
+<div data-page="start1" class="page">
+	<div class="page-content">
+		<div class="content-block container">
+			<div class="row">
+				<br/>
+			</div>
+			<div class="row">
+				<img src="images/logo_320.png" style="margin-left: auto; margin-right: auto; max-width: 320px;" class="col-60 center">
+			</div>
+			<div class="row">
+			</div>
+			<div class="row">
+				<div class="col-20"></div>
+				<div class="col-60">
+					<!--
+					<div class="content-block-title">Players</div>
+					-->
+					<div class="list-block" ng-controller="playerController">
+                        <!--
+						<li class="item-content">
+							<div class="item-input">
+								<input type="text" placeholder="Player x">
+							</div>
+						</li>
+                        -->
+
+                        <li class="item-content" ng-repeat="player in players track by $index">
+							<div class="item-input">
+								<input type="text" ng-model="player.value" name="" placeholder="Player {{$index+1}}">
+							</div>
+                        </li>
+
+                        <!--
+                        {{ players }}
+                        <button ng-click="saveEverything()" class="button button-big button-fill color-blue">Save</button>
+                        -->
+
+						<li class="item-content">
+							<span ng-click="addNewChoice()">
+                            <!--<i class="f7-icons size-25">add_round_fill</i>-->
+                            <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+                            </span>
+						</li>
+					</div>
+				</div>
+				<div class="col-20"></div>
+			</div>
+			<div class="row">
+				<div class="col-20"></div>
+				<div class="col-60">
+					<a href="mode1.html" class="button button-big button-fill color-green">
+                    Let's get drunk&nbsp;
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <!--<i class="f7-icons">chevron-right</i>-->
+                    </a>
+				</div>
+				<div class="col-20"></div>
+			</div>
+		</div>
+    </div>
+</div>

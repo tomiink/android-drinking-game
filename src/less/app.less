@@ -1,0 +1,39 @@
+@import "mixins.less";
+@import "variables.less";
+
+
+.page-content{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.content-block, .container{
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollable-list{
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    max-height: 100vh;
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.list-image{
+    object-fit: none;
+    object-position: center;
+    height: 100px;
+    width: 100px;
+}
+
+.top5 { margin-top:5px; }
+.top7 { margin-top:7px; }
+.top10 { margin-top:10px; }
+.top15 { margin-top:15px; }
+.top17 { margin-top:17px; }
+.top30 { margin-top:30px; }
