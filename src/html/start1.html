@@ -27,7 +27,7 @@
                         -->
 
                         <li class="item-content" ng-repeat="player in players track by $index">
-							<div class="item-input">
+							<div class="item-input playerInput-{{$index}}">
 								<input type="text" ng-model="player.value" name="" placeholder="Player {{$index+1}}">
 							</div>
                         </li>

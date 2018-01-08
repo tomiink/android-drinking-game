@@ -1,4 +1,4 @@
-angular.module('MobileAngular1.services.Players', [
+angular.module('DrinkingGame.services.Players', [
     'LocalStorageModule'
 ])
 

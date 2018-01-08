@@ -1,34 +1,22 @@
 @import "mixins.less";
 @import "variables.less";
 
-
+/* General */
 .page-content{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+   display: flex;
+   flex-direction: column;
+   height: 100vh;
 }
 
 .content-block, .container{
-    display: flex;
-    flex-direction: column;
+   display: flex;
+   flex-direction: column;
 }
 
-.scrollable-list{
-    flex: 1 1 auto;
-    overflow-y: scroll;
-    max-height: 100vh;
-}
-
-.h1, .h2, .h3, h1, h2, h3 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.list-image{
-    object-fit: none;
-    object-position: center;
-    height: 100px;
-    width: 100px;
+.h1, .h2, .h3, h1, h2, h3,
+.h4, .h5, .h6, h4, h5, h6 {
+   margin-top: 20px;
+   margin-bottom: 20px;
 }
 
 .top5 { margin-top:5px; }
@@ -37,3 +25,27 @@
 .top15 { margin-top:15px; }
 .top17 { margin-top:17px; }
 .top30 { margin-top:30px; }
+
+.row {
+   margin-right: 0 !important;
+   margin-left: 0 !important;
+}
+
+/* Game modes*/
+.scrollable-list{
+   flex: 1 1 auto;
+   overflow-y: auto;
+   overflow-x: hidden;
+   max-height: 100vh;
+}
+
+.game-mode-list li{
+   list-style: none;
+}
+
+.list-image{
+   object-fit: none;
+   object-position: center;
+   height: 100px;
+   width: 100px;
+}

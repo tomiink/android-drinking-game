@@ -22,21 +22,21 @@
 						<li class="item-content">
 							<div class="item-input">
 								<input type="text" placeholder="Player x">
-							</div> 
+							</div>
 						</li>
                         -->
-                        
+
                         <li class="item-content" ng-repeat="player in players track by $index">
-							<div class="item-input">
+							<div class="item-input playerInput-{{$index}}">
 								<input type="text" ng-model="player.value" name="" placeholder="Player {{$index+1}}">
-							</div> 
+							</div>
                         </li>
-                        
+
                         <!--
                         {{ players }}
                         <button ng-click="saveEverything()" class="button button-big button-fill color-blue">Save</button>
                         -->
-                        
+
 						<li class="item-content">
 							<span ng-click="addNewChoice()">
                             <!--<i class="f7-icons size-25">add_round_fill</i>-->
@@ -61,9 +61,3 @@
 		</div>
     </div>
 </div>
-
-
-
-
-
-

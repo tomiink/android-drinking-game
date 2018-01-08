@@ -233,7 +233,7 @@ gulp.task('html', function() {
 ======================================================================*/
 /*
 gulp.task('less', function () {
-    
+
     return gulp.src(config.less.src).pipe(less({
       paths: config.less.paths.map(function(p){
         return path.resolve(__dirname, p);
@@ -252,7 +252,7 @@ gulp.task('less', function () {
     .pipe(cssmin())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(path.join(config.dest, 'css')));
-    
+
 });
 
 gulp.task('css', function () {
@@ -283,8 +283,8 @@ gulp.task('css', function () {
 */
 
 gulp.task('styles', function() {
-  
-    var scssStream = 
+
+    var scssStream =
         streamqueue({ objectMode: true },
             gulp.src(config.scss.src),
             gulp.src(config.scss.paths)
@@ -292,7 +292,7 @@ gulp.task('styles', function() {
         .pipe(sass())
         .pipe(concat('scss-files.scss'))
     ;
-    
+
     var lessStream = gulp.src(config.less.src)
         .pipe(less({
             paths: config.less.paths.map(function(p){
@@ -302,8 +302,8 @@ gulp.task('styles', function() {
         .pipe(less())
         .pipe(concat('less-files.less'))
     ;
-  
-    var cssStream = 
+
+    var cssStream =
         streamqueue({ objectMode: true },
             gulp.src(config.css.src),
             gulp.src(config.css.paths)
@@ -341,7 +341,7 @@ gulp.task('js', function() {
     streamqueue({ objectMode: true },
       gulp.src(config.vendor.js),
       gulp.src('./src/js/**/*.js').pipe(ngFilesort()),
-      gulp.src(['src/templates/**/*.html']).pipe(templateCache({ module: 'MobileAngular1' }))
+      gulp.src(['src/templates/**/*.html']).pipe(templateCache({ module: 'DrinkingGame' }))
     )
     .pipe(sourcemaps.init())
     .pipe(concat('app.js'))

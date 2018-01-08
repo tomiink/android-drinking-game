@@ -1,5 +1,5 @@
-angular.module('MobileAngular1.services.Geolocation', [
-    'MobileAngular1.services.Cordova'
+angular.module('DrinkingGame.services.Geolocation', [
+    'DrinkingGame.services.Cordova'
 ])
 
 .factory('getCurrentPosition', ["deviceReady", "$document", "$window", "$rootScope", function(deviceReady, $document, $window, $rootScope){

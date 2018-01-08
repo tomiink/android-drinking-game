@@ -1,4 +1,4 @@
-angular.module('MobileAngular1.services.Cordova', [])
+angular.module('DrinkingGame.services.Cordova', [])
 
 .factory('deviceReady', function(){
     return function(done) {

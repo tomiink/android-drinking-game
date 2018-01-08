@@ -1,4 +1,4 @@
-angular.module('MobileAngular1.controllers.Player', [])
+angular.module('DrinkingGame.controllers.Player', [])
 
 .directive('onResume', function() {
     return {

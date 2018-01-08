@@ -135,6 +135,6 @@ node_modules
 bower_components
 
 ### Local resources ###
-\#*/
+[#]*
 media
 www

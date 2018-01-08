@@ -1,4 +1,4 @@
-angular.module('MobileAngular1.services.Forecast', [])
+angular.module('DrinkingGame.services.Forecast', [])
 
 .factory('getWeather', ["$http", function($http){
     return function(lat, lng, done) {

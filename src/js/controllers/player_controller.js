@@ -1,10 +1,10 @@
-angular.module('MobileAngular1.controllers.Player', [
+angular.module('DrinkingGame.controllers.Player', [
     'LocalStorageModule',
-    'MobileAngular1.services.Players'
+    'DrinkingGame.services.Players'
 ])
 
 .controller("playerController", ["$scope", "localStorageService", "playerService", function($scope, localStorageService, playerService) {
- 
+
     $scope.init = function() {
         $scope.players = playerService.getData();
     };
@@ -34,7 +34,7 @@ angular.module('MobileAngular1.controllers.Player', [
     $scope.$watch('players', function(newVal, oldVal) {
         playerService.setData($scope.players);
     }, true);
-    
+
     $scope.init();
     $scope.cleanArray();
     $scope.fillBlanks();
