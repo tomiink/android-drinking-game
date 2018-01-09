@@ -3,16 +3,15 @@ angular.module('DrinkingGame.services.PhraseData', [
 ])
 
 .factory('phraseDataService', ["$rootScope", "localStorageService", function($rootScope, localStorageService){
-
-   var selectedGameMode = localStorageService.get("gameModeID") || 0;
-
    var phraseData = {
       settings: {
          deletethiskey: true,
          phraseDelayMin: 5,
          phraseDelayMax: 15,
+         phrasePrefix: "&hellip;",
       },
       phraseModifiers: {
+         e: "End of the current game",
          n: "Normal",
          v: "Virus",
          r: "Rule",
@@ -73,36 +72,62 @@ angular.module('DrinkingGame.services.PhraseData', [
    };
 
    return {
-      getPhraseData: function (){
+      getData: function(){
          return phraseData;
       },
-      selectGameMode: function(id){
-         localStorageService.set('gameModeID', id);
-         selectedGameMode = id;
-      },
-      getGameModes: function (){
+      getGameModeList: function (){
          var gameModes = [];
          phraseData.gameModes.forEach(function(mode) {
-            delete mode.phraseData;
+            //delete mode.phraseData;
             gameModes.push(mode);
          });
          return gameModes;
       },
+      gameModeExists: function(id){
+         return (typeof id !== 'undefined' && id < phraseData.gameModes.length)?true:false;
+      },
+      getGameMode: function(id){
+         if (this.gameModeExists(id)){
+            var gameData = phraseData.gameModes[id];
+            gameData.gameId = id;
+            gameData.phraseModifiers = phraseData.phraseModifiers;
+            gameData.settings = this.mergeArray(phraseData.settings, gameData.settings);
+            return gameData;
+         }
+         return false;
+      },
+      // General functions
+      mergeArray: function(dest, src) {
+         for (var key in src)
+            if (src.hasOwnProperty(key))
+               dest[key] = src[key];
+         return dest;
+      }
+
+
+      /*
+      getPhraseData: function (){
+         return phraseData;
+      },
+      selectGameMode: function(id){
+         localStorageService.set('gameModeId', id);
+         selectedGameMode = id;
+      },
 
       // Game mode
-      getGameModeID: function(id){
-         return (id < phraseData.gameModes.length)?phraseData.gameModes[id]:false;
-      },
-      getGameMode: function(){
-         return this.getGameModeID(selectedGameMode);
+      setGameMode: function(id){
+         if(this.gameModeExists()){
+            selectedGameMode = id;
+            localStorageService.set("gameModeId", id);
+            return true;
+         }
+         return false;
       },
 
       // Phrase data
-      getPhraseDataID: function(id){
-         return (id < phraseData.gameModes.length)?phraseData.gameModes[id]-phraseData:false;
-      },
-      getPhraseData: function(){
-         return this.getPhraseDataID(selectedGameMode);
+      getPhraseData: function(id){
+         if (typeof id === 'undefined') id = selectedGameMode;
+         return (id < phraseData.gameModes.length)?phraseData.gameModes[id].phraseData:false;
       },
 
       // Game mode names
@@ -114,6 +139,6 @@ angular.module('DrinkingGame.services.PhraseData', [
       getSettings: function(){
          return phraseData.settings;
       }
-
+      */
    };
 }]);

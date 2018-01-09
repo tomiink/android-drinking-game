@@ -1,9 +1,9 @@
 angular.module('DrinkingGame.controllers.Game', [
    'DrinkingGame.services.Players',
-   'DrinkingGame.services.PhraseData'
+   'DrinkingGame.services.Game'
 ])
 
-.controller("gameController", ["$scope", "mainService", "playerService", "phraseDataService", "$interpolate", function($scope, mainService, playerService, phraseDataService, $interpolate) {
+.controller("gameController", ["$scope", "mainService", "playerService", "gameService", "$interpolate", function($scope, mainService, playerService, gameService, $interpolate) {
 
    var currentIndex, currentPlayer, currentPhrase;
 
@@ -11,15 +11,6 @@ angular.module('DrinkingGame.controllers.Game', [
       currentIndex = -1;
       currentPlayer = -1;
       currentPhrase = {};
-
-      $scope.phrasePrefix = "&hellip;";
-      $scope.players = playerService.getData();
-      $scope.gamePack = phraseDataService.getGameMode();
-      $scope.gamePack.phraseModifiers = phraseDataService.getPhraseModifiers();
-      $scope.gamePack.settings = mainService.mergeArray(phraseDataService.getSettings(), ($scope.gamePack.settings));
-      $scope.gamePack.settings.phraseDelayMin = $scope.players.length;
-
-      $scope.phraseQueue = [];
 
       /*
       $scope.phrase = {phrase: "Start game", actor: "anonyme", type: "normal"};
@@ -77,67 +68,16 @@ angular.module('DrinkingGame.controllers.Game', [
       $scope.phrase.player = $scope.player;
    }
    */
-
-   $scope.getRandomDelay = function(){
-      var min = $scope.gamePack.settings.phraseDelayMin;
-      var max = $scope.gamePack.settings.phraseDelayMax;
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-   }
-
-   $scope.prepareGame = function() {
-
-      var originalLog = console.log
-      console.log=function(obj){
-          originalLog(JSON.parse(JSON.stringify(obj)))
-      }
-
-      var refinePhraseData = function(phraseData){
-         var newPhraseData = [];
-         var checkCount = 0;
-
-         for (var x in phraseData){
-            var line = phraseData[x];
-
-            if(Array.isArray(line[0])){
-               checkCount++;
-               for (var y in line){
-                  newPhraseData.push(line[y]);
-               }
-            }else{
-               newPhraseData.push(line);
-            }
-         }
-
-         //console.log(newPhraseData);
-
-         for (var x in newPhraseData){
-            var line = newPhraseData[x];
-
-            if(line.length >= 2 && line[1].includes('d')){
-               checkCount++;
-               newPhraseData.splice(x, 1);
-               line[1] = line[1].replace(/d/g, '');
-
-
-               newPhraseData.splice(Number(x) + $scope.getRandomDelay(), 0, line);
-            }
-         }
-
-         //console.log(newPhraseData);
-         return (checkCount > 0)?refinePhraseData(newPhraseData):newPhraseData;
-         return newPhraseData;
-      };
-
-      $scope.phraseQueue = refinePhraseData($scope.gamePack.phraseData);
-
-      //console.log($scope.phraseQueue);
-   };
-
+   /*
    $scope.showNext = function() {
+
+      console.log(phraseDataService.getGameMode());
+
       if($scope.phraseQueue.length == 0){
          $scope.prepareGame();
 
-         console.log($scope.phraseQueue);
+         //console.log($scope.phraseQueue);
+         $scope.showNext();
 
       }else{
          var phrase = $scope.phraseQueue.shift();
@@ -149,4 +89,22 @@ angular.module('DrinkingGame.controllers.Game', [
    $scope.init();
    //$scope.showPhrase();
    $scope.showNext();
+   */
+
+   $scope.showPhrase = function(phrase){
+      $scope.phrase = {};
+      if(phrase[1].includes('e')) console.log("END OF THE GAME!");
+      $scope.phrase.phrase = phrase[0];
+   };
+
+   $scope.showNext = function(){
+      $scope.showPhrase(gameService.getNextPhrase());
+   };
+
+   gameService.initGame();
+   $scope.showPhrase(gameService.getCurrentPhrase());
+
+   /*
+   TODO: Peli alkamaan alusta jos pelaajia vaihdetaan?
+   */
 }]);

@@ -1,14 +1,14 @@
 angular.module('DrinkingGame.controllers.Mode', [
-   'DrinkingGame.services.PhraseData'
+   'DrinkingGame.services.Game'
 ])
 
-.controller("modeController", ["$scope", "phraseDataService", function($scope, phraseDataService) {
+.controller("modeController", ["$scope", "gameService", function($scope, gameService) {
 
    $scope.init = function() {
-      $scope.gameModes = phraseDataService.getGameModes();
+      $scope.gameModes = gameService.getGameModeList();
    };
    $scope.selectGameMode = function(selection) {
-      phraseDataService.selectGameMode(selection);
+      gameService.setGameMode(selection);
    };
 
    $scope.init();
